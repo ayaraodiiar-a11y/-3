@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Интерактивный квиз</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; text-align: center; }
+    .quiz-container { border: 1px solid #ccc; padding: 20px; border-radius: 10px; }
+    .question { font-weight: bold; margin-bottom: 20px; }
+    .option { display: block; margin: 10px 0; padding: 10px; border-radius: 5px; border: 1px solid #aaa; cursor: pointer; }
+    .option:hover { background-color: #f0f0f0; }
+    #result { font-size: 1.2em; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="question" class="question"></div>
+    <div id="options"></div>
+    <div id="result"></div>
+  </div>
+
+  <script src="quiz.js"></script>
+</body>
+</html>
