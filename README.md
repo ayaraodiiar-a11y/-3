@@ -68,3 +68,4 @@ loadQuestion();
 
 </body>
 </html>
+Control + Shift + m
