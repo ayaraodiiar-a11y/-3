@@ -1,55 +1,70 @@
-const quiz = [
-  {
-    question: "Какой язык программирования мы используем для этого квиза?",
-    options: ["Python", "JavaScript", "C++", "HTML"],
-    answer: "JavaScript"
-  },
-  {
-    question: "Что означает HTML?",
-    options: ["Hyper Text Markup Language", "High Text Machine Language", "Hyperlinking Text Markup Language", "Home Tool Markup Language"],
-    answer: "Hyper Text Markup Language"
-  },
-  {
-    question: "Что делает CSS?",
-    options: ["Скриптит", "Оформляет страницу", "Создает базы данных", "Управляет сервером"],
-    answer: "Оформляет страницу"
-  }
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Квиз</title>
+</head>
+<body>
+
+<h1>Квиз</h1>
+
+<p id="question"></p>
+
+<button onclick="answer(0)" id="btn0"></button>
+<button onclick="answer(1)" id="btn1"></button>
+<button onclick="answer(2)" id="btn2"></button>
+
+<p id="result"></p>
+
+<script>
+let questions = [
+    {
+        question: "Столица Франции?",
+        answers: ["Париж", "Берлин", "Рим"],
+        correct: 0
+    },
+    {
+        question: "2 + 2 = ?",
+        answers: ["3", "4", "5"],
+        correct: 1
+    },
+    {
+        question: "Цвет неба?",
+        answers: ["Синий", "Зелёный", "Красный"],
+        correct: 0
+    }
 ];
 
-let currentQuestion = 0;
+let current = 0;
 let score = 0;
 
-function showQuestion() {
-  const q = quiz[currentQuestion];
-  document.getElementById("question").innerText = q.question;
-  const optionsDiv = document.getElementById("options");
-  optionsDiv.innerHTML = "";
-  q.options.forEach(option => {
-    const btn = document.createElement("button");
-    btn.innerText = option;
-    btn.className = "option";
-    btn.onclick = () => checkAnswer(option);
-    optionsDiv.appendChild(btn);
-  });
+function loadQuestion() {
+    document.getElementById("question").innerText = questions[current].question;
+
+    document.getElementById("btn0").innerText = questions[current].answers[0];
+    document.getElementById("btn1").innerText = questions[current].answers[1];
+    document.getElementById("btn2").innerText = questions[current].answers[2];
 }
 
-function checkAnswer(selected) {
-  if (selected === quiz[currentQuestion].answer) {
-    score++;
-  }
-  currentQuestion++;
-  if (currentQuestion < quiz.length) {
-    showQuestion();
-  } else {
-    showResult();
-  }
+function answer(i) {
+    if (i === questions[current].correct) {
+        score++;
+        document.getElementById("result").innerText = "Правильно!";
+    } else {
+        document.getElementById("result").innerText = "Неправильно!";
+    }
+
+    current++;
+
+    if (current < questions.length) {
+        setTimeout(loadQuestion, 1000);
+    } else {
+        document.body.innerHTML = "<h1>Ты набрал " + score + " очков из " + questions.length + "</h1>";
+    }
 }
 
-function showResult() {
-  document.getElementById("question").innerText = "Квиз завершен!";
-  document.getElementById("options").innerHTML = "";
-  document.getElementById("result").innerText = Ваш результат: ${score} из ${quiz.length};
-}
+loadQuestion();
+  
+</script>
 
-// Запуск квиза
-showQuestion();
+</body>
+</html>
